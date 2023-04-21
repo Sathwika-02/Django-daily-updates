@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <h2 class="login-title">Register</h2>
+
+    <form class="login-form" method="post">
+      {% csrf_token %}
+      {% if messages %}
+
+    {% for message in messages %}
+    <div class="alert alert-info">
+      {{ message }}
+    </div>
+    
+    {% endfor %}
+{% endif %}
+     
+      <div>
+        <label for="username">Username</label>
+        <input
+               id="username"
+               type="text"
+               placeholder="username"
+               name="username"
+               required
+               />
+      </div>
+
+      <div>
+        <label for="email">Email </label>
+        <input
+               id="email"
+               type="email"
+               placeholder="me@example.com"
+               name="email"
+               required
+               />
+      </div>
+
+      <div>
+        <label for="password">Password </label>
+        <input
+               id="password"
+               type="password"
+               placeholder="password"
+               name="password"
+               required
+               />
+      </div>
+      <div>
+        <label for="mobile">Mobile Number</label>
+        <input
+               id="mobile"
+               type="text"
+               placeholder="mobile"
+               name="mobile"
+               required
+               />
+      </div>
+     
+
+      <button class="btn btn--form" type="submit" value="Sign up">
+        Sign up
+      </button>
+      <div class="login">
+        Already have an account? <a href="{% url 'login' %}"> Login </a>
+      </div>
+    </form>
+</div>
+{% endblock %}
+
+
