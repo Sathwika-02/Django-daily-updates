@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  {% if messages %}
+
+    {% for message in messages %}
+    <div class="alert alert-info">
+      {{ message }}
+    </div>
+    
+    {% endfor %}
+{% endif %}
+    <h2 class="login-title">Enter otp sent to your mobile number </h2>
+   
+    <form action ="" method="post" class="login-form">
+        {% csrf_token %}
+        <div>
+            <label for="otp">Enter otp</label>
+            <input
+                   id="otp"
+                   type="text"
+                   placeholder="Enter otp"
+                   name="otp"
+                   required
+                   />
+          </div>
+
+     <div id="ti"></div>
+
+      <button class="btn btn--form" type="submit" value="Log in">
+        Submit
+      </button>
+    </form>
+</div>
+<script>
+  var remaining_time = {{rem}};
+
+ var timer = setInterval(function() {
+  
+   remaining_time--;
+  
+   document.getElementById("ti").innerHTML = "Time remaining: " + remaining_time + " seconds";
+  
+   if (remaining_time <= 0) {
+  
+   clearInterval(timer);
+  
+   document.getElementById("ti").innerHTML = "OTP has expired";
+  
+   }
+  
+   }, 1000);
+
+
+
+</script>
+
+{% endblock %}

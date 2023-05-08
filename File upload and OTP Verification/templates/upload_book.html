@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Django file upload</title>
+  </head>
+  <body>
+    {% if request.user.is_authenticated %}
+    <p class="text-success"> You are Logged In </p>
+    <a href={% url 'logout_user' %} type="button" class="btn btn-success btn-lg">Log out </a>
+    {% else %}
+    <p class="text-danger"> User is not logged in </p>
+    <a href={% url 'register' %} type="button" class="btn btn-success btn-lg">Register </a>
+  <br>
+    <a href={% url 'login' %} type="button" class="btn btn-success btn-lg">Log In</a>
+    {% endif %}
+  <h2>Upload Book </h2>
+
+  <p>
+    <a href="{% url 'book_list' %}" > Book List</a>
+   </p> 
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p><input type="submit" value="upload book" /></p>
+  </form>
+
+  </body>
+</html>

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Django file upload</title>
+  </head>
+  <body>
+   <h2>Book List </h2>
+   <p>
+    <a href="{% url 'upload_book' %}" > Upload Book </a>
+   </p>
+   <form method="get" action="/search" class="d-flex" role="search">
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query" id="query">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+  </form>
+  <br>
+  <br>
+  <form method="get" action="/recent" class="d-flex" role="search">
+    <button class="btn btn-outline-success" type="submit">
+      Recent Uploaded File
+    </button>
+  </form>
+   <table>
+    <thead>
+      <th>Cover</th>
+        <th>Title </th>
+        <th>Author </th>
+        <th>Download </th>
+    </thead>
+    <tbody>
+        {% for book in books %}
+        <tr>
+          <td><img src="{{book.cover.url}}" alt="Noimage" width="50%"</td>
+            <td> {{ book.title }} </td>
+            <td> {{ book.author}} </td>
+            <td> <a href="{{book.pdf.url}}" target="_blank"> Download PDF </a>
+                </td>
+                
+                  <td>
+                    <form method="post" action="{% url 'delete_book' book.pk %}">
+                      {% csrf_token %}
+                      <button type="submit">Delete Book </button>
+                    </form>
+                   
+                    <form method="post" action="{% url 'payment' %}">
+                      {% csrf_token %}
+                      <button type="submit">Buy book</button>
+                    </form>
+                    
+                   
+                    </td>
+              
+        </tr>
+        {% endfor %}
+    </tbody>
+
+   </table>
+</html>
